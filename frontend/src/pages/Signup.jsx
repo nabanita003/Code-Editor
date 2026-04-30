@@ -30,7 +30,7 @@ const submitForm = async (e) => {
   }
 };
   return (
-<div className="flex items-center justify-center min-h-screen bg-[#0f0e0e] px-4">
+<div className="flex items-center justify-center min-h-screen px-4 animated-bg">
 
   <form
     onSubmit={submitForm}

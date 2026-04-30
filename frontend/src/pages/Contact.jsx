@@ -30,7 +30,7 @@ const Contact = () => {
         toast.error(data.msg);
       }
     } catch (err) {
-      toast.error("Something went wrong");
+      toast.error(err.message||"Something went wrong");
     }
   };
 

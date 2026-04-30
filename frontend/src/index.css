@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+
+.animated-bg {
+  background: #0f0f1a;
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-bg::before {
+  content: "";
+  position: absolute;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, #7209b7, transparent 60%);
+  animation: pulseMove 6s linear infinite;
+}
+
+@keyframes pulseMove {
+  0% {
+    transform: translate(-30%, -30%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-30%, -30%) rotate(360deg);
+  }
+}
