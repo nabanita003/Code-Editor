@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import logo from "../Images/logo.png"
 import { Link, useNavigate } from 'react-router-dom';
 import { api_base_url } from '../helper/index';
@@ -8,6 +8,14 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const navigate = useNavigate();
+
+//   useEffect(() => {
+//   const token = localStorage.getItem("token");
+
+//   if (token) {
+//     navigate("/home"); // already logged in → go home
+//   }
+// }, []);
 
 const submitForm = async (e) => {
   e.preventDefault();
@@ -20,10 +28,14 @@ const submitForm = async (e) => {
     const data = await res.json();
     if (data.success) {
       localStorage.setItem("token", data.token);
+      localStorage.setItem("email", data.user.email);
       toast.success(data.msg);
-      navigate("/");
+        setTimeout(() => {
+    navigate("/home");
+  }, 1000);
     } else {
-      toast.error(data.msg);
+      // toast.error(data.msg);
+      navigate("/login");
     }
   } catch (err) {
     toast.error(err.message);

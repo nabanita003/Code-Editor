@@ -20,8 +20,14 @@ const submitForm = async (e) => {
     });
     const data = await res.json();
     if (data.success) {
-      toast.success(data.msg);
-      navigate("/login");
+        localStorage.setItem("token", data.token);
+  localStorage.setItem("email", data.user.email);
+
+  toast.success("Signup successful!");
+
+  setTimeout(() => {
+    navigate("/home");
+  }, 1000);
     } else {
       toast.error(data.msg);
     }
