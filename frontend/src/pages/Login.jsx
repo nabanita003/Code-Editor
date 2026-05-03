@@ -9,14 +9,6 @@ const Login = () => {
   const [pwd, setPwd] = useState("");
   const navigate = useNavigate();
 
-//   useEffect(() => {
-//   const token = localStorage.getItem("token");
-
-//   if (token) {
-//     navigate("/home"); // already logged in → go home
-//   }
-// }, []);
-
 const submitForm = async (e) => {
   e.preventDefault();
   try {
@@ -29,13 +21,18 @@ const submitForm = async (e) => {
     if (data.success) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("email", data.user.email);
+      localStorage.setItem("role", data.user.role);
       toast.success(data.msg);
-        setTimeout(() => {
+  //       setTimeout(() => {
+  //   navigate("/home");
+  // }, 1000);
+         if (data.user.role === "admin") {
+    navigate("/admin");
+  } else {
     navigate("/home");
-  }, 1000);
-    } else {
-      // toast.error(data.msg);
-      navigate("/login");
+  }
+} else {
+     navigate("/login");
     }
   } catch (err) {
     toast.error(err.message);
